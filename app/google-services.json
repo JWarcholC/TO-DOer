@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "670674136711",
+    "firebase_url": "https://to-do-pwsz.firebaseio.com",
+    "project_id": "to-do-pwsz",
+    "storage_bucket": "to-do-pwsz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670674136711:android:f9fd7966129e108f6f5222",
+        "android_client_info": {
+          "package_name": "pl.pwsztar.to_doer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670674136711-b7flvv7sl2i98ppgkqjp4h5p6kb3dajv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFQ15UGwh9c_UAkyHbHEl0rSGhZweagHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670674136711-b7flvv7sl2i98ppgkqjp4h5p6kb3dajv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
