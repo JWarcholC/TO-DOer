@@ -22,3 +22,4 @@ class ExampleInstrumentedTest {
         assertEquals("pl.pwsztar.to_doer", appContext.packageName)
     }
 }
+
