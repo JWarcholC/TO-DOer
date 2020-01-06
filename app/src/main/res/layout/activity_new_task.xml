@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
     <Button
-            android:id="@+id/button5"
+            android:id="@+id/register_btn"
             android:layout_width="170dp"
             android:layout_height="70dp"
             android:backgroundTint="#15BB25"
@@ -58,7 +58,7 @@
             app:layout_constraintVertical_bias="0.060000002" />
 
     <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/go_back_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitXY"
@@ -71,12 +71,12 @@
             app:srcCompat="@drawable/backarrow_icon" />
 
     <EditText
-            android:id="@+id/editText"
+            android:id="@+id/login_name"
             android:layout_width="305dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Task name"
+            android:hint="Task name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.06" />
 
     <RadioButton
@@ -106,7 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.189" />
 
     <RadioButton
@@ -119,7 +119,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.321" />
 
     <RadioButton
@@ -132,7 +132,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.46" />
 
     <EditText
@@ -142,7 +142,7 @@
             android:ems="10"
             android:inputType="date"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.6"
             tools:layout_editor_absoluteX="55dp" />
 
@@ -152,9 +152,11 @@
             android:layout_height="48dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintTop_toBottomOf="@+id/login_name"
             app:layout_constraintVertical_bias="0.6"
-            app:srcCompat="@drawable/calendar_icon"
             tools:layout_editor_absoluteX="310dp" />
+
+    <!--    ikonka do imagebutton-->
+    <!--            app:srcCompat="@drawable/calendar_icon"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
