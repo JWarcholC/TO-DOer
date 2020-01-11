@@ -9,6 +9,9 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
+import pl.pwsztar.to_doer.domain.User
+import pl.pwsztar.to_doer.utils.isConnectedToNetwork
+import pl.pwsztar.to_doer.utils.md5
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -19,14 +22,20 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         register_btn.setOnClickListener {
+            if(!this.baseContext.isConnectedToNetwork()) {
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
             val name = name.text.toString()
             val surName = surname.text.toString()
             val login : String? = login_name.text.toString()
-            val password = password.text.toString()
+            var password = password.text.toString()
             val email = email.text.toString()
             val country = country.text.toString()
 
-            if(email.isEmpty() || password.isEmpty()) {
+            if(email.isEmpty() && password.isEmpty()) {
                 Toast.makeText(this, "Email and password must be filled!",
                     Toast.LENGTH_SHORT)
                     .show()
@@ -34,6 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            password = password.md5()
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if(!it.isSuccessful) {
@@ -80,6 +90,3 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 }
-
-class User(val email : String, val password : String, var login : String?,
-           var name : String?, var surName : String?, var country : String?)
