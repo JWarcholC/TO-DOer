@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "pl.pwsztar.to_doer"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -32,12 +32,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //dodanie firebase'a
+    // Firebase
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+
+    // FB auth
+    implementation 'com.facebook.android:facebook-android-sdk:5.13.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

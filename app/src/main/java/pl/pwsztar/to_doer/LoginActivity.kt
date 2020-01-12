@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.facebook.*
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,12 +26,20 @@ import pl.pwsztar.to_doer.utils.md5
 class LoginActivity : AppCompatActivity() {
     //Google Login Request Code
     private val RC_SIGN_IN = 7
+
     //Google Sign In Client
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    // FB callback manager
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        AppEventsLogger.activateApp(application)
+        fb_login_btn.setReadPermissions("email", "public_profile", "user_friends")
 
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -44,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val login = login.text.toString()
-            var password = password.text.toString()
+            val password = password.text.toString()
             if(login.isEmpty() && password.isEmpty()) {
                 Toast.makeText(this, "E-mail and password must be filled!",
                     Toast.LENGTH_SHORT)
@@ -52,8 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            password = password.md5()
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(login, password)
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(login, password.md5())
                 .addOnCompleteListener {
                     if(!it.isSuccessful) {
                         return@addOnCompleteListener
@@ -80,7 +91,20 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        //TODO: fb
+
+        fb_btn.setOnClickListener {
+           fb_login_btn.performClick()
+        }
+
+        fb_login_btn.setOnClickListener {
+            if(Profile.getCurrentProfile() != null) {
+                moveToNewTask()
+                return@setOnClickListener
+            }
+
+            firebaseAuthWithFacebook()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -94,6 +118,9 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 Log.w("[LoginActivity]", "Google sign in failed", e)
             }
+        } else { /* FB auth */
+            callbackManager.onActivityResult(requestCode, resultCode, data)
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
@@ -117,6 +144,35 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this,"Auth Failed",Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun firebaseAuthWithFacebook() {
+        LoginManager.getInstance()
+            .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult?) {
+                    Log.i("[LoginActivity]", "Successfully logged in")
+                    val currentProfile = Profile.getCurrentProfile()
+
+                    val user = User(
+                        "", "", currentProfile.id.toString(), currentProfile.firstName,
+                        currentProfile.lastName, "FB World"
+                    )
+                    save(user)
+                    moveToNewTask()
+                }
+
+                override fun onCancel() {
+                    Log.i("[LoginActivity]", "FB cancelled")
+                }
+
+                override fun onError(error: FacebookException?) {
+                    Toast.makeText(
+                        this@LoginActivity, "Error ${error?.message}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            })
     }
 
     private fun moveToNewTask() {
