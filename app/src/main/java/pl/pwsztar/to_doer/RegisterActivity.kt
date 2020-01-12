@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
             val name = name.text.toString()
             val surName = surname.text.toString()
             val login : String? = login_name.text.toString()
-            var password = password.text.toString()
+            val password = password.text.toString()
             val email = email.text.toString()
             val country = country.text.toString()
 
@@ -43,8 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            password = password.md5()
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password.md5())
                 .addOnCompleteListener {
                     if(!it.isSuccessful) {
                         return@addOnCompleteListener

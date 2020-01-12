@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.facebook.AccessToken
+import com.facebook.login.LoginManager
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_new_task.*
+import pl.pwsztar.to_doer.domain.Task
 import pl.pwsztar.to_doer.utils.isConnectedToNetwork
 import pl.pwsztar.to_doer.utils.verifyUser
 
@@ -67,7 +70,7 @@ class NewTaskActivity : AppCompatActivity() {
         newTaskRef.setValue(task).addOnSuccessListener {
             Log.d("[NewTaskActivity] ","Task ${task.name} added to db!")
             Toast.makeText(this, "Task ${task.name} successfully added",
-                Toast.LENGTH_SHORT)
+                Toast.LENGTH_LONG)
                 .show()
         }.addOnFailureListener {
             Log.e("[NewTaskActivity] ","Task ${task.name} adding to db failed!")
@@ -79,6 +82,9 @@ class NewTaskActivity : AppCompatActivity() {
 
 
     private fun goBack() {
+        if(AccessToken.getCurrentAccessToken() != null) {
+            LoginManager.getInstance().logOut()
+        }
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
@@ -103,5 +109,3 @@ class NewTaskActivity : AppCompatActivity() {
         return type
     }
 }
-
-class Task(val name:String, val category:String, val taskDate:String?)
