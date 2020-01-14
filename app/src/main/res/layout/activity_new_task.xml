@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.075"
             app:srcCompat="@drawable/backarrow_icon" />
-
+  
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/new_task_main_view"
             android:layout_width="match_parent"
@@ -211,7 +211,5 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.94" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
