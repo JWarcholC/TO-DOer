@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TO-DOer</string>
+
+    <!--    fb auth-->
+    <string name="facebook_app_id">705652966633321</string>
+    <string name="fb_login_protocol_scheme">fb705652966633321</string>
+
 </resources>
