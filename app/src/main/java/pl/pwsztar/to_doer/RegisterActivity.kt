@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT)
                         .show()
 
-                    Log.d("[MainActivity]", "User ${login ?: email} registration failed!")
+                    Log.d("[RegisterActivity]", "User ${login ?: email} registration failed!")
                 }
         }
 

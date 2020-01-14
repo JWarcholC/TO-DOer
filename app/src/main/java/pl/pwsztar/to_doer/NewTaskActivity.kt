@@ -26,14 +26,14 @@ class NewTaskActivity : AppCompatActivity() {
             Log.d("[NewTaskActivity]", "uid is null")
             Toast.makeText(this, "You are not logged in!", Toast.LENGTH_SHORT)
                 .show()
-            goBack()
+            goToLoginActivity()
         }
 
         go_back_btn.setOnClickListener {
-            goBack()
+            goToMainActivity()
         }
 
-        register_btn.setOnClickListener {
+        add_task_btn.setOnClickListener {
             if(!this.baseContext.isConnectedToNetwork()) {
                 Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
                     .show()
@@ -72,6 +72,8 @@ class NewTaskActivity : AppCompatActivity() {
             Toast.makeText(this, "Task ${task.name} successfully added",
                 Toast.LENGTH_LONG)
                 .show()
+
+            goToMainActivity()
         }.addOnFailureListener {
             Log.e("[NewTaskActivity] ","Task ${task.name} adding to db failed!")
             Toast.makeText(this, "Task ${task.name}  adding failed",
@@ -80,8 +82,13 @@ class NewTaskActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
-    private fun goBack() {
+
+    private fun goToLoginActivity() {
         if(AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logOut()
         }
