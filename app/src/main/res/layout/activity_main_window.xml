@@ -6,59 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-            android:id="@+id/register_btn"
-            android:layout_width="170dp"
-            android:layout_height="70dp"
-            android:backgroundTint="#15BB25"
-            android:text="Register"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country" />
-
-    <EditText
-            android:id="@+id/name"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
-            app:layout_constraintVertical_bias="0.46" />
-
-    <EditText
-            android:id="@+id/surname"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Surname"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
-            app:layout_constraintVertical_bias="0.6" />
-
-    <EditText
-            android:id="@+id/country"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Country"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
-            app:layout_constraintVertical_bias="0.74" />
-
     <ProgressBar
-            android:id="@+id/progressBar5"
+            android:id="@+id/progressBar7"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="305dp"
             android:layout_height="20dp"
@@ -69,6 +18,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20"
             app:layout_constraintVertical_bias="0.060000002" />
+
+    <ImageButton
+            android:id="@+id/go_back_btn2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView9"
+            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.075"
+            app:srcCompat="@drawable/backarrow_icon" />
+
+    <Button
+            android:id="@+id/register_btn"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:backgroundTint="#15BB25"
+            android:text="Add task"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/taskViewMain" />
 
     <TextView
             android:id="@+id/textView9"
@@ -87,7 +62,7 @@
             android:id="@+id/textView20"
             android:layout_width="340dp"
             android:layout_height="18dp"
-            android:hint="CREATE ACCOUNT"
+            android:hint="USER_NAME"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,43 +71,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9"
             app:layout_constraintVertical_bias="0.060000002" />
 
-    <EditText
-            android:id="@+id/login_name"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Login"
+    <ListView
+            android:id="@+id/taskViewMain"
+            android:layout_width="304dp"
+            android:layout_height="412dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
-            app:layout_constraintVertical_bias="0.04000002" />
-
-    <EditText
-            android:id="@+id/password"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Password"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar7"
             app:layout_constraintVertical_bias="0.18" />
-
-    <EditText
-            android:id="@+id/email"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar5"
-            app:layout_constraintVertical_bias="0.32" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
