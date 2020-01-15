@@ -110,9 +110,11 @@ class NewTaskActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // to jest zabezpieczenie, ono w niczym nie przeszkadza (testowane xD)
             if(taskDate.isEmpty()) {
-                taskDate = sdf.format(Calendar.getInstance().timeInMillis).toString()
+                Toast.makeText(this, "Enter expiration task date",
+                    Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
             }
 
             val taskCategory = getCheckedRadioButton()
