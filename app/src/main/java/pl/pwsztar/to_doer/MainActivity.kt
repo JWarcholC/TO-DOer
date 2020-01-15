@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             goToLoginActivity()
         }
         firebaseUsername()
-
         firebaseTasks()
+
         go_back_btn2.setOnClickListener { goToLoginActivity() }
         register_btn.setOnClickListener { goToNewTaskActivity() }
 
@@ -84,17 +84,15 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshots: DataSnapshot) {
-                var asdf:String? = "  aaaa "
                 for(ds in snapshots.children) {
-                 asdf = ds.child("email").getValue(String::class.java)
-             }
-                textView20.text = asdf
+                    if(ds.key.equals("login")) {
+                        textView20.text = " Hello, ${ds.getValue(String::class.java)}"
+                        break
+                    }
+                }
             }
         }
 
         ref.addListenerForSingleValueEvent(eventListener)
     }
-
-
-
 }

@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val name = name.text.toString()
             val surName = surname.text.toString()
-            val login : String? = login_name.text.toString()
+            var login : String? = login_name.text.toString()
             val password = password.text.toString()
             val email = email.text.toString()
             val country = country.text.toString()
@@ -43,6 +43,10 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if(login?.isEmpty()!!) {
+                login = email
+            }
+
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password.md5())
                 .addOnCompleteListener {
                     if(!it.isSuccessful) {
@@ -51,18 +55,18 @@ class RegisterActivity : AppCompatActivity() {
                     val user = User(email, password, login, name, surName, country)
                     save(user)
 
-                    Toast.makeText(this, "Successfully created user ${login ?: email}",
+                    Toast.makeText(this, "Successfully created user $login",
                         Toast.LENGTH_SHORT)
                         .show()
 
                     goBack()
 
                 }.addOnFailureListener {
-                    Toast.makeText(this, "User ${login ?: email} registration failed!",
+                    Toast.makeText(this, "User $login registration failed!",
                         Toast.LENGTH_SHORT)
                         .show()
 
-                    Log.d("[RegisterActivity]", "User ${login ?: email} registration failed!")
+                    Log.d("[RegisterActivity]", "User $login registration failed!")
                 }
         }
 

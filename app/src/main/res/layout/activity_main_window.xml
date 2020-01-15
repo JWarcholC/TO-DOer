@@ -76,7 +76,7 @@
             android:id="@+id/textView11"
             android:layout_width="369dp"
             android:layout_height="425dp"
-            android:hint="LIST_OF_TASKS"
+            android:hint="List is empty! It's high time to fullfiil it"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
