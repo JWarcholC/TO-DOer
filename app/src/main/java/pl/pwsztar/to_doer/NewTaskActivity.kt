@@ -1,5 +1,6 @@
 package pl.pwsztar.to_doer
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,10 @@ class NewTaskActivity : AppCompatActivity() {
 
     var uid:String? = null
 
+    @SuppressLint("SimpleDateFormat")
+    val sdf = SimpleDateFormat("dd.MM.yyyy")
+
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
@@ -29,11 +34,65 @@ class NewTaskActivity : AppCompatActivity() {
             Log.d("[NewTaskActivity]", "uid is null")
             Toast.makeText(this, "You are not logged in!", Toast.LENGTH_SHORT)
                 .show()
-            goBack()
+            goToLoginActivity()
         }
 
         go_back_btn.setOnClickListener {
-            goBack()
+            goToMainActivity()
+        }
+
+        edu_radio_btn.setOnClickListener {
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        work_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        sport_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        home_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+        }
+
+        home_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+        }
+
+        calendar_btn.setOnClickListener{
+            new_task_main_view.isVisible = false
+            new_task_calendar_view.isVisible = true
+        }
+
+        set_date_btn.setOnClickListener{
+            new_task_main_view.isVisible = true
+            new_task_calendar_view.isVisible = false
+
+        }
+
+        calendar.setOnDateChangeListener { arg0, year, mon, date ->
+            var month = mon+1
+            val input_date = "$date/$month/$year"
+            val format1 = SimpleDateFormat("dd/MM/yyyy")
+            val dt1 = format1.parse(input_date)
+            if(System.currentTimeMillis() >= dt1.getTime()){
+                date_text.setText("")
+            }else{
+                date_text.setText("$date.$month.$year")
+            }
+
         }
 
         add_task_btn.setOnClickListener {
@@ -44,11 +103,16 @@ class NewTaskActivity : AppCompatActivity() {
             }
 
             val taskName = task_name.text.toString()
-            val taskDate = date_text.text.toString()
+            var taskDate = date_text.text.toString()
 
             if(taskName.isEmpty()) {
                 Toast.makeText(this, "Enter task name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }
+
+            // to jest zabezpieczenie, ono w niczym nie przeszkadza (testowane xD)
+            if(taskDate.isEmpty()) {
+               taskDate = sdf.format(Calendar.getInstance().timeInMillis).toString()
             }
 
             val taskCategory = getCheckedRadioButton()
@@ -62,50 +126,6 @@ class NewTaskActivity : AppCompatActivity() {
             val task = Task(taskName, taskCategory, taskDate)
             saveTask(task)
 
-
-
-        }
-
-        edu_radio_btn.setOnClickListener {
-            work_radio_btn.isChecked = false;
-            sport_radio_btn.isChecked = false;
-            home_radio_btn.isChecked = false;
-        }
-
-        work_radio_btn.setOnClickListener {
-            edu_radio_btn.isChecked = false;
-            sport_radio_btn.isChecked = false;
-            home_radio_btn.isChecked = false;
-        }
-
-        sport_radio_btn.setOnClickListener {
-            edu_radio_btn.isChecked = false;
-            work_radio_btn.isChecked = false;
-            home_radio_btn.isChecked = false;
-        }
-
-        home_radio_btn.setOnClickListener {
-            edu_radio_btn.isChecked = false;
-            work_radio_btn.isChecked = false;
-            sport_radio_btn.isChecked = false;
-        }
-
-        home_radio_btn.setOnClickListener {
-            edu_radio_btn.isChecked = false;
-            work_radio_btn.isChecked = false;
-            sport_radio_btn.isChecked = false;
-        }
-
-        calendar_btn.setOnClickListener{
-            new_task_main_view.isVisible = false;
-            new_task_calendar_view.isVisible = true;
-        }
-
-        set_date_btn.setOnClickListener{
-            new_task_main_view.isVisible = true;
-            new_task_calendar_view.isVisible = false;
-            val sdf = SimpleDateFormat("dd.MM.yyyy")
-            date_text.setText(sdf.format(Date(calendar.getDate())))
         }
     }
 
@@ -119,6 +139,8 @@ class NewTaskActivity : AppCompatActivity() {
             Toast.makeText(this, "Task ${task.name} successfully added",
                 Toast.LENGTH_LONG)
                 .show()
+
+            goToMainActivity()
         }.addOnFailureListener {
             Log.e("[NewTaskActivity] ","Task ${task.name} adding to db failed!")
             Toast.makeText(this, "Task ${task.name}  adding failed",
@@ -127,8 +149,13 @@ class NewTaskActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
-    private fun goBack() {
+
+    private fun goToLoginActivity() {
         if(AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logOut()
         }
