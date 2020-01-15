@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main_window.*
 import pl.pwsztar.to_doer.utils.verifyUser
+import java.util.concurrent.ConcurrentHashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     var listItems = ArrayList<String>()
 
     var adapter: ArrayAdapter<String>? = null
+    val tasksWithIdsInAdpater = ConcurrentHashMap<Int, String>()
 
 
     @SuppressLint("SetTextI18n")
@@ -46,9 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
         taskList.adapter = adapter
+        taskList.setOnItemClickListener { _, _, pos, _ ->
+            firebaseDeleteTaskByUid(tasksWithIdsInAdpater[pos])
+        }
     }
-
-
 
     private fun goToNewTaskActivity() {
         val intent = Intent(this, NewTaskActivity::class.java)
@@ -71,6 +74,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshots: DataSnapshot) {
                 listItems.clear()
+
+                var i = 0
                 for(ds in snapshots.children) {
                     val category = ds.child("category").getValue(String::class.java)
                     val name = ds.child("name").getValue(String::class.java)
@@ -79,7 +84,11 @@ class MainActivity : AppCompatActivity() {
 
                     if(!date.isNullOrEmpty()) {
                         val formattedTask = String.format("%11s\t\t\t\t%-20s\t\t%-10s", date, name, category)
-                        listItems.add(formattedTask)
+
+                        listItems.add(i, formattedTask)
+                        ds.key?.let { tasksWithIdsInAdpater.put(i, it) }
+
+                        i++
                     }
                 }
                 adapter?.notifyDataSetChanged()
@@ -105,5 +114,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         ref.addListenerForSingleValueEvent(eventListener)
+    }
+
+    private fun firebaseDeleteTaskByUid(refUid: String?) {
+        val ref = FirebaseDatabase.getInstance().getReference("/tasks/").child("$uid")
+        ref.child("$refUid").removeValue().addOnSuccessListener {
+            Toast.makeText(this, "Successfully deleted task $refUid", Toast.LENGTH_LONG)
+                .show()
+
+            adapter?.clear()
+            firebaseTasks()
+            adapter?.notifyDataSetChanged()
+        }
     }
 }
