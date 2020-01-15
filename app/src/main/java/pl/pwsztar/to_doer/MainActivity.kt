@@ -125,6 +125,10 @@ class MainActivity : AppCompatActivity() {
             adapter?.clear()
             firebaseTasks()
             adapter?.notifyDataSetChanged()
+        }.addOnFailureListener {
+            Toast.makeText(this, "Deleting task $refUid failed!", Toast.LENGTH_LONG)
+                .show()
+            return@addOnFailureListener
         }
     }
 }
