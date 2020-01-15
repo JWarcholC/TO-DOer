@@ -90,7 +90,7 @@ class NewTaskActivity : AppCompatActivity() {
             if(System.currentTimeMillis() >= dt1.getTime()){
                 date_text.setText("")
             }else{
-                date_text.setText("$date.$month.$year")
+                date_text.setText("$date.0${month}.$year")
             }
 
         }

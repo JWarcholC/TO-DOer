@@ -19,7 +19,6 @@ import pl.pwsztar.to_doer.utils.verifyUser
 
 class MainActivity : AppCompatActivity() {
 
-    val spacing = 20
     private var uid:String? = null
 
     var listItems = ArrayList<String>()
@@ -79,10 +78,8 @@ class MainActivity : AppCompatActivity() {
                         ?.replace("\\s".toRegex(), "")
 
                     if(!date.isNullOrEmpty()) {
-                        val format = String.format(
-                            "%-" + spacing + "s%-" + spacing + "s%-" + spacing + "s\n",
-                            date, name, category)
-                        listItems.add(format)
+                        val formattedTask = String.format("%11s\t\t\t\t%-20s\t\t%-10s", date, name, category)
+                        listItems.add(formattedTask)
                     }
                 }
                 adapter?.notifyDataSetChanged()
