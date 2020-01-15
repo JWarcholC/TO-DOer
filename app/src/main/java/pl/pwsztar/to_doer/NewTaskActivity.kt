@@ -1,10 +1,12 @@
 package pl.pwsztar.to_doer
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.firebase.database.FirebaseDatabase
@@ -12,12 +14,15 @@ import kotlinx.android.synthetic.main.activity_new_task.*
 import pl.pwsztar.to_doer.domain.Task
 import pl.pwsztar.to_doer.utils.isConnectedToNetwork
 import pl.pwsztar.to_doer.utils.verifyUser
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class NewTaskActivity : AppCompatActivity() {
 
     var uid:String? = null
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
@@ -31,6 +36,48 @@ class NewTaskActivity : AppCompatActivity() {
 
         go_back_btn.setOnClickListener {
             goToMainActivity()
+        }
+
+        edu_radio_btn.setOnClickListener {
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        work_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        sport_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            home_radio_btn.isChecked = false
+        }
+
+        home_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+        }
+
+        home_radio_btn.setOnClickListener {
+            edu_radio_btn.isChecked = false
+            work_radio_btn.isChecked = false
+            sport_radio_btn.isChecked = false
+        }
+
+        calendar_btn.setOnClickListener{
+            new_task_main_view.isVisible = false
+            new_task_calendar_view.isVisible = true
+        }
+
+        set_date_btn.setOnClickListener{
+            new_task_main_view.isVisible = true
+            new_task_calendar_view.isVisible = false
+            val sdf = SimpleDateFormat("dd.MM.yyyy")
+            date_text.setText(sdf.format(Date(calendar.date)))
         }
 
         add_task_btn.setOnClickListener {

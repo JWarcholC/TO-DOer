@@ -32,9 +32,8 @@ class MainActivity : AppCompatActivity() {
                 .show()
             goToLoginActivity()
         }
+        firebaseUsername()
 
-
-        textView20.text = "Hi!"
         firebaseTasks()
         go_back_btn2.setOnClickListener { goToLoginActivity() }
         register_btn.setOnClickListener { goToNewTaskActivity() }
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun firebaseTasks() {
         val ref = FirebaseDatabase.getInstance().getReference("/tasks/").child("$uid")
-
         val eventListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -76,5 +74,25 @@ class MainActivity : AppCompatActivity() {
         }
         ref.addListenerForSingleValueEvent(eventListener)
     }
+
+    private fun firebaseUsername() {
+        val ref = FirebaseDatabase.getInstance().getReference("/users/").child("$uid")
+        val eventListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshots: DataSnapshot) {
+                var asdf:String? = "  aaaa "
+                for(ds in snapshots.children) {
+                 asdf = ds.child("email").getValue(String::class.java)
+             }
+                textView20.text = asdf
+            }
+        }
+
+        ref.addListenerForSingleValueEvent(eventListener)
+    }
+
+
 
 }

@@ -87,12 +87,24 @@ class LoginActivity : AppCompatActivity() {
         }
 
         gmail_btn.setOnClickListener {
+            if(!this.baseContext.isConnectedToNetwork()) {
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
 
         fb_btn.setOnClickListener {
+            if(!this.baseContext.isConnectedToNetwork()) {
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
            fb_login_btn.performClick()
         }
 
