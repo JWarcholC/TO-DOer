@@ -25,7 +25,7 @@ class NewTaskActivity : AppCompatActivity() {
     @SuppressLint("SimpleDateFormat")
     val sdf = SimpleDateFormat("dd.MM.yyyy")
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
@@ -79,7 +79,20 @@ class NewTaskActivity : AppCompatActivity() {
         set_date_btn.setOnClickListener{
             new_task_main_view.isVisible = true
             new_task_calendar_view.isVisible = false
-            date_text.setText(sdf.format(Date(calendar.getDate())))
+
+        }
+
+        calendar.setOnDateChangeListener { _, year, mon, date ->
+            var month = mon+1
+            val input_date = "$date/$month/$year"
+            val format1 = SimpleDateFormat("dd/MM/yyyy")
+            val dt1 = format1.parse(input_date)
+            if(System.currentTimeMillis() >= dt1.getTime()){
+                date_text.setText("")
+            }else{
+                date_text.setText("$date.$month.$year")
+            }
+
         }
 
         add_task_btn.setOnClickListener {
@@ -99,7 +112,7 @@ class NewTaskActivity : AppCompatActivity() {
 
             // to jest zabezpieczenie, ono w niczym nie przeszkadza (testowane xD)
             if(taskDate.isEmpty()) {
-               taskDate = sdf.format(Calendar.getInstance().timeInMillis).toString()
+                taskDate = sdf.format(Calendar.getInstance().timeInMillis).toString()
             }
 
             val taskCategory = getCheckedRadioButton()
