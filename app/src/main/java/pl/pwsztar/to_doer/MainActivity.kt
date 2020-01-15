@@ -15,15 +15,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main_window.*
 import pl.pwsztar.to_doer.utils.verifyUser
+import java.text.SimpleDateFormat
 import java.util.concurrent.ConcurrentHashMap
 
 
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("SimpleDateFormat")
+    val sdf = SimpleDateFormat("dd.MM.yyyy")
     private var uid:String? = null
-
     var listItems = ArrayList<String>()
-
     var adapter: ArrayAdapter<String>? = null
     val tasksWithIdsInAdpater = ConcurrentHashMap<Int, String>()
 
@@ -83,6 +84,10 @@ class MainActivity : AppCompatActivity() {
                         ?.replace("\\s".toRegex(), "")
 
                     if(!date.isNullOrEmpty()) {
+                        if(System.currentTimeMillis() >= sdf.parse(date).time) {
+                            ref.child("${ds.key}").removeValue()
+                            continue
+                        }
                         val formattedTask = String.format("%11s\t\t\t\t%-20s\t\t%-10s", date, name, category)
 
                         listItems.add(i, formattedTask)

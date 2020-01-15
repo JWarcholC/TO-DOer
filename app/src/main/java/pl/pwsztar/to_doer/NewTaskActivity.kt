@@ -15,7 +15,7 @@ import pl.pwsztar.to_doer.domain.Task
 import pl.pwsztar.to_doer.utils.isConnectedToNetwork
 import pl.pwsztar.to_doer.utils.verifyUser
 import java.text.SimpleDateFormat
-import java.util.*
+
 
 
 class NewTaskActivity : AppCompatActivity() {
