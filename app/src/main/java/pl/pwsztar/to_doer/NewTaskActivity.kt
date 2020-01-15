@@ -23,6 +23,9 @@ class NewTaskActivity : AppCompatActivity() {
     var uid:String? = null
 
     @SuppressLint("SimpleDateFormat")
+    val sdf = SimpleDateFormat("dd.MM.yyyy")
+
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
@@ -76,8 +79,7 @@ class NewTaskActivity : AppCompatActivity() {
         set_date_btn.setOnClickListener{
             new_task_main_view.isVisible = true
             new_task_calendar_view.isVisible = false
-            val sdf = SimpleDateFormat("dd.MM.yyyy")
-            date_text.setText(sdf.format(Date(calendar.date)))
+            date_text.setText(sdf.format(Date(calendar.getDate())))
         }
 
         add_task_btn.setOnClickListener {
@@ -88,11 +90,16 @@ class NewTaskActivity : AppCompatActivity() {
             }
 
             val taskName = task_name.text.toString()
-            val taskDate = date_text.text.toString()
+            var taskDate = date_text.text.toString()
 
             if(taskName.isEmpty()) {
                 Toast.makeText(this, "Enter task name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }
+
+            // to jest zabezpieczenie, ono w niczym nie przeszkadza (testowane xD)
+            if(taskDate.isEmpty()) {
+               taskDate = sdf.format(Calendar.getInstance().timeInMillis).toString()
             }
 
             val taskCategory = getCheckedRadioButton()

@@ -11,8 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d6a04e9-c4bc-410a-8b91-7a5d5fb5cc68" name="Default Changelist" comment="First version of graphic interface.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/NewTaskActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/NewTaskActivity.kt" afterDir="false" />
     </list>
@@ -43,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+            <state relative-caret-position="1005">
+              <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
               <folding>
                 <element signature="e#28#603#0" expanded="true" />
               </folding>
@@ -85,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/NewTaskActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+            <state relative-caret-position="498">
+              <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
               <folding>
                 <element signature="e#28#626#0" expanded="true" />
               </folding>
@@ -153,8 +151,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/RegisterActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_window.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/LoginActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_task.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/NewTaskActivity.kt" />
       </list>
     </option>
@@ -357,11 +355,11 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.4968051" weight="0.25561497" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="1" sideWeight="0.49840257" visible="true" weight="0.35508022" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49840257" weight="0.35508022" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49840257" weight="0.27165776" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.32941177" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.24171123" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50159746" side_tool="true" visible="true" weight="0.35508022" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.49946752" visible="true" weight="0.1593583" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5005325" side_tool="true" visible="true" weight="0.1593583" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49893504" weight="0.2502674" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.3684771" weight="0.19679144" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.32941177" />
@@ -637,8 +635,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+        <state relative-caret-position="1005">
+          <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
           <folding>
             <element signature="e#28#603#0" expanded="true" />
           </folding>
@@ -647,8 +645,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/pwsztar/to_doer/NewTaskActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+        <state relative-caret-position="498">
+          <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
           <folding>
             <element signature="e#28#626#0" expanded="true" />
           </folding>

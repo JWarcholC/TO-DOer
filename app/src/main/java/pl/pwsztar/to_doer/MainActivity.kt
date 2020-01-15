@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                     val cat = ds.child("category").getValue(String::class.java)
                     val name = ds.child("name").getValue(String::class.java)
                     val date = ds.child("taskDate").getValue(String::class.java)
+                        ?.replace("\\s".toRegex(), "")
+
                     if(!date.isNullOrEmpty()) {
                         str += "$date\t\t\t\t $name\t\t\t\t\t\t $cat\n"
                     }
