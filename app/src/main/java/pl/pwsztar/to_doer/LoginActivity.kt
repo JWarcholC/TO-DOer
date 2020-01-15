@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                         return@addOnCompleteListener
                     }
                     Log.d("[LoginActivity]", "Successfully logged in user $login")
-                    moveToNewTask()
+                    moveToTaskList()
 
                 }.addOnFailureListener {
                     Toast.makeText(this, "User $login logging in failed!",
@@ -87,18 +87,30 @@ class LoginActivity : AppCompatActivity() {
         }
 
         gmail_btn.setOnClickListener {
+            if(!this.baseContext.isConnectedToNetwork()) {
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
 
         fb_btn.setOnClickListener {
+            if(!this.baseContext.isConnectedToNetwork()) {
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
            fb_login_btn.performClick()
         }
 
         fb_login_btn.setOnClickListener {
             if(Profile.getCurrentProfile() != null) {
-                moveToNewTask()
+                moveToTaskList()
                 return@setOnClickListener
             }
 
@@ -135,10 +147,10 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("[LoginActivity]", "signInWithCredential:success")
 
                     val user = FirebaseAuth.getInstance().currentUser?.email?.let { User(it, "",
-                        null, null, null, null) }
+                        it, null, null, null) }
                     user?.let { save(it) }
 
-                    moveToNewTask()
+                    moveToTaskList()
                 } else {
                     Log.w("[LoginActivity]", "signInWithCredential:failure", task.exception)
                     Toast.makeText(this,"Auth Failed",Toast.LENGTH_LONG).show()
@@ -158,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
                         currentProfile.lastName, "FB World"
                     )
                     save(user)
-                    moveToNewTask()
+                    moveToTaskList()
                 }
 
                 override fun onCancel() {
@@ -175,8 +187,8 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
-    private fun moveToNewTask() {
-        val intent = Intent(this, NewTaskActivity::class.java)
+    private fun moveToTaskList() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

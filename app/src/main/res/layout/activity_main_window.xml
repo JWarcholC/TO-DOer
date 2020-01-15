@@ -4,7 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
     <ProgressBar
             android:id="@+id/progressBar7"
@@ -17,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20"
-            app:layout_constraintVertical_bias="0.060000002" />
+            app:layout_constraintVertical_bias="0.024" />
 
     <ImageButton
             android:id="@+id/go_back_btn2"
@@ -43,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taskViewMain" />
+            app:layout_constraintTop_toBottomOf="@+id/taskList" />
 
     <TextView
             android:id="@+id/textView9"
@@ -72,13 +73,13 @@
             app:layout_constraintVertical_bias="0.060000002" />
 
     <ListView
-            android:id="@+id/taskViewMain"
-            android:layout_width="304dp"
-            android:layout_height="412dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/taskList"
+            android:layout_width="369dp"
+            android:layout_height="427dp"
+            app:layout_constraintBottom_toTopOf="@+id/register_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBar7"
-            app:layout_constraintVertical_bias="0.18" />
+            app:layout_constraintVertical_bias="0.39" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_new_task.*
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_register.go_back_btn
 import pl.pwsztar.to_doer.domain.User
 import pl.pwsztar.to_doer.utils.isConnectedToNetwork
 import pl.pwsztar.to_doer.utils.md5
@@ -27,24 +23,28 @@ class RegisterActivity : AppCompatActivity() {
 
         register_btn.setOnClickListener {
             if(!this.baseContext.isConnectedToNetwork()) {
-                makeText(this, "Check network connection", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Check network connection", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
 
             val name = name.text.toString()
             val surName = surname.text.toString()
-            val login : String? = login_name.text.toString()
+            var login : String? = login_name.text.toString()
             val password = password.text.toString()
             val email = email.text.toString()
             val country = country.text.toString()
 
             if(email.isEmpty() && password.isEmpty()) {
-                makeText(this, "Email and password must be filled!",
+                Toast.makeText(this, "Email and password must be filled!",
                     Toast.LENGTH_SHORT)
                     .show()
 
                 return@setOnClickListener
+            }
+
+            if(login?.isEmpty()!!) {
+                login = email
             }
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password.md5())
@@ -55,18 +55,18 @@ class RegisterActivity : AppCompatActivity() {
                     val user = User(email, password, login, name, surName, country)
                     save(user)
 
-                    makeText(this, "Successfully created user ${login ?: email}",
+                    Toast.makeText(this, "Successfully created user $login",
                         Toast.LENGTH_SHORT)
                         .show()
 
                     goBack()
 
                 }.addOnFailureListener {
-                    makeText(this, "User ${login ?: email} registration failed!",
+                    Toast.makeText(this, "User $login registration failed!",
                         Toast.LENGTH_SHORT)
                         .show()
 
-                    Log.d("[MainActivity]", "User ${login ?: email} registration failed!")
+                    Log.d("[RegisterActivity]", "User $login registration failed!")
                 }
         }
 
